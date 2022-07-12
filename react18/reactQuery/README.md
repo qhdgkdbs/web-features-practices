@@ -1,4 +1,7 @@
 # 리액트 쿼리
+[리액트 쿼리 공식문서](https://react-query-v2.tanstack.com/guides/important-defaults)
+를 참고하여 작성하였습니다.
+
 * 3가지 주요개념
   * Queries
   * Mutations
@@ -61,13 +64,4 @@ function Todos() {
 
 render(<App />, document.getElementById('root'))
 ```
-
-* important Defaults
-  * useQuery 와 useInfiniteQuery 는 캐시된 데이터를 오래되었다고 판단
-    * staleTime opt를 통해 변경 가능
-  * refetch가 되는 시점
-    * 쿼리 마운트의 새로운 인스턴스
-    * 윈도우의 refocused
-    * 네트워크 재연결시
-    * 
 
