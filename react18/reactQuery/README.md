@@ -2,6 +2,8 @@
 [리액트 쿼리 공식문서](https://react-query-v2.tanstack.com/guides/important-defaults)
 를 참고하여 작성하였습니다.
 
+* concepts 폴더에 마크다운으로 정리하였습니다.
+
 * 3가지 주요개념
   * Queries
   * Mutations
