@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {cBtn, cLink} from "../components/Elements";
 import {Link} from "react-router-dom";
 import { useQuery } from "react-query";
-import http from "../apis/http";
 import {getAllProducts} from '../apis/products'
 
 
@@ -18,8 +17,9 @@ const HomePage: React.FC = () => {
     return (
         <div>
             <div className={`${cBtn}`}>hello</div>
+            <Link to={'/product/upload'}>업로드!</Link>
             {/*// @ts-ignore*/}
-            {data?.products?.map((item) => <Link to={`/product/${item.id}`} className={`${cLink}`}>{item.title}</Link>)}
+            {data?.map((item) => <Link key={item.id} to={`/product/${item.id}`} className={`${cLink}`}>{item.title}</Link>)}
         </div>
     )
 };

@@ -6,9 +6,11 @@ import {getProduct} from "../../apis/products";
 const ProductPage: React.FC = () => {
     const { idx } = useParams<{ idx: string }>();
 
-    const { isLoading, isError, data, error } = useQuery(`product${idx}`, () => getProduct(idx), {
+    const { isLoading, isError, data, error } = useQuery(['product', idx], () => getProduct(idx), {
         refetchOnWindowFocus: true,
         staleTime: 0,
+        // 하기 옵션을 활용하면 계속해서 데이터를 갱신할 수 있음.
+        // refetchInterval: 1000
     });
 
     if (isLoading) {

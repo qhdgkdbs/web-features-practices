@@ -39,10 +39,12 @@ import { useQuery, useQueryClient } from 'react-query'
 ```javascript
 queryClient.invalidateQueries(['todos', { type: 'done' }])
 
-// The query below will be invalidated
+// The query below will be invalidated 
+// ex) ['todos', { type: 'done' }], ['todos', { type: 'done' }], ...
 const todoListQuery = useQuery(['todos', { type: 'done' }], fetchTodoList)
 
 // However, the following query below will NOT be invalidated
+// ex) ['todos', { type: 'ing' }], ['todos', { type: 'yet' }], ...
 const todoListQuery = useQuery('todos', fetchTodoList)
 ```
 
