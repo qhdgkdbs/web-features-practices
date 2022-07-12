@@ -14,4 +14,3 @@
     * retry, retryDelay 를 통해서 옵션 변경 가능
 * 실제로 변경된 경우에만 값이 변경됨. (Json compatible 에서만)
     * useMemo, useCallback에 안정성 제공
-* 
