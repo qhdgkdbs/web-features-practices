@@ -15,6 +15,7 @@ export const getProduct = async (id?: string) => {
 };
 
 
+// 리액트 쿼리를 활용한 데이터 추가
 export const useAddProduct = () => {
     const queryClient = useQueryClient()
 
@@ -24,6 +25,9 @@ export const useAddProduct = () => {
             // ✅ update detail view directly
             // @ts-ignore
             queryClient.setQueryData("products_list", old => [...old, newPost.data])
+
+            // or 데이터를 refetch 할 수 있음
+            // queryClient.invalidateQueries('products_list')
         }
     })
 };

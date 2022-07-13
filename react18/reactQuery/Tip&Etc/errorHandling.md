@@ -1,4 +1,6 @@
 # 에러 핸들링
+
+* [배민 기술 블로그 참고](https://tecoble.techcourse.co.kr/post/2021-10-01-react-query-error-handling/)
 * 에러 콜백 호출 횟수가 컴포넌트의 리렌더링 횟수를 따라감.
   * 예시: retry 시에 onError 매번 호출하는 등
   * ~~원인: useQuery가 호출될 때마다 리액트 쿼리는 새로운 Observer를 만들고 onError은 Observer level에서 동작하기 때문~~

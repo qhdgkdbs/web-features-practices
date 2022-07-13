@@ -4,7 +4,6 @@ import {useQuery} from "react-query";
 import {getProduct, useAddProduct} from "../../apis/products";
 
 const UploadPage: React.FC = () => {
-
     // 'BOSE SOUND LINK mini', 'speaker', 10.99,9.8, 'bose'
     const uploadProduct = useAddProduct()
 
