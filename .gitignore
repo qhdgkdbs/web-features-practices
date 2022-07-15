@@ -1,3 +1,6 @@
 node_modules
 *.env
 .idea
+
+# custom
+tmp.tsx

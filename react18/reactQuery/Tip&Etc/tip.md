@@ -22,8 +22,7 @@
   );
 ```
 
-## 동시성
-* 그냥 쓰면 됨. 
+## useQueries
 ```javascript
 function App () {
    // 이렇게 주루륵 있을 때 걍 다 병렬로 처리된다 => 어떻게 구현한거지... redux batch update 같넹
@@ -33,8 +32,7 @@ function App () {
    ...
  }
 ```
-* 단, 렌더링 중에 계속 쿼리가 수행된다면, 쿼리를 수행하는 로직이 hook룰에 위배될 수 있음.
-=> ```useQueries 를 사용하자```
+* 단, 동적으로 요청의 수가 변경되는 경우, 쿼리를 수행하는 로직이 hook 룰(어떤 룰...)에 위배될 수 있음 => ```useQueries 를 사용하자```
 ```javascript
 function App({ users }) {
    const userQueries = useQueries(
@@ -47,6 +45,9 @@ function App({ users }) {
    )
  }
 ```
+
+* useQuery를 사용하면서 suspense 모드로 동작시킬 때 useQueries 를 사용해야 좋음
+  * 만약 비동기 요청이 하나라도 실패하면 계속해서, suspense: true인 상태가 유지됨...
 
 
 ## Mutation
@@ -78,3 +79,5 @@ useMutation(addTodo, {
 * MutateAsync
   * Promise 리턴
   * 오류를 직접 처리해야함
+
+
