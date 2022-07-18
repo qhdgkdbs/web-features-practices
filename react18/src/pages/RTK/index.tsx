@@ -1,6 +1,6 @@
 import React from "react";
-import counterSlice from "../../store/counterSlice";
-import { useAppDispatch, useAppSelector } from '../../store/index'
+import counterSlice from "../../store/slices/counterSlice";
+import { useAppDispatch, useAppSelector } from '../../store/config'
 
 
 const RtkPage: React.FC = () => {
