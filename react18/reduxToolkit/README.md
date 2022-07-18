@@ -52,3 +52,110 @@
   * 리덕스 스토어가 없는 경우에 provider로 사용될 수 있음
 * setupListners():
   * refetchOnMount와 refetchOnReconnect의 사용을 가능케하는 유틸리티
+
+## 사용예시
+* ```npm install @reduxjs/toolkit react-redux```
+* 작은 store를 slice라고 할 수 있음
+```javascript
+// 1. 스토어를 만들자
+// 1-1. 리듀서를 만들자
+const reducer = (state, action) => {
+    // 3 버튼에 맞는 리듀서를 만들자
+    if(action.type === 'up') ({...state, value: state.value + action.step})
+    return state;
+}
+
+const initialState = {value: 0}
+const store = createStore(reducer, initialState)
+
+// 2. 컴포넌트를 감싸자
+const App = () => {
+    const count = useSelector(state => state.value)
+    const dispatch = useDispatch()
+    
+    return (
+      <Provider store={store}>
+        <div>
+          {count}<button onClick={() => dispatch({type: 'up', step: 2})}>UP</button>
+        </div>
+      </Provider>)
+}
+```
+
+* 여러 슬라이스를 하나의 스토어로
+```javascript
+// // 1. 스토어를 만들자
+// // 1-1. 리듀서를 만들자
+// const reducer = (state, action) => {
+//     // 3 버튼에 맞는 리듀서를 만들자
+//     // 불변성 유지를 위한 spread operator
+//     if(action.type === 'up') ({...state, value: state.value + action.step})
+//     return state;
+// }
+//
+// const initialState = {value: 0}
+// const store = createStore(reducer, initialState)
+ 
+
+// a. 작은 스토어라고 할 수 있는 slice를 만들자 -> 하나의 스토어로 합쳐주면 됨.
+// counterSlice, timeSlice.. 등을 여러개 만들면 됨
+const counterSlice = createSlice({
+  name: 'counterSlice',
+  initialState: {value: 0},
+  // 스토어는 리듀서가 필요해
+  reducers:{
+      // 리덕스 툴킷에서는 불변성 유지 제공
+      up: (state, action) => {state.value = state.value + action.payload} 
+  }
+})
+
+// b. 여러 slice를 하나의 store로 합쳐
+const store = configureStore({
+  reducer: {
+      counter: counterSlice.reducer
+  }
+})
+
+// 2. 컴포넌트를 감싸자
+const App = () => {
+    const count = useSelector(state => state.count.value)
+    const dispatch = useDispatch()
+    
+    return (
+      <Provider store={store}>
+        <div>
+          // {count}<button onClick={() => dispatch({type: 'counterSlice/up', step: 2})}>UP</button>
+          {count}<button onClick={() => dispatch( counterSlice.actions.up(2) )}>UP</button>
+        </div>
+      </Provider>)
+}
+``` 
+
+
+## 파일 분리
+1. store.js
+```javascript
+const store = configureStore({
+  reducer: {
+      counter: counterSlice.reducer
+  }
+})
+
+export default store
+```
+2. counterSlice.js
+```javascript
+const counterSlice = createSlice({
+  name: 'counterSlice',
+  initialState: {value: 0},
+  // 스토어는 리듀서가 필요해
+  reducers:{
+      // 리덕스 툴킷에서는 불변성 유지 제공
+      up: (state, action) => {state.value = state.value + action.payload} 
+  }
+})
+
+export default counterSlice
+export const {up} = counterSlice.actions
+```
+3. index.jsx

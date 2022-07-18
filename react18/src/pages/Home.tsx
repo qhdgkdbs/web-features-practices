@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {cBtn, cLink} from "../components/Elements";
+import React from "react";
+import {cBtn} from "../components/Elements";
 import {Link} from "react-router-dom";
 import { useQuery } from "react-query";
 import {getAllProducts} from '../apis/products'
@@ -16,10 +16,10 @@ const HomePage: React.FC = () => {
 
     return (
         <div>
-            <div className={`${cBtn}`}>hello</div>
-            <Link to={'/product/upload'}>업로드!</Link>
-            {/*// @ts-ignore*/}
-            {data?.map((item) => <Link key={item.id} to={`/product/${item.id}`} className={`${cLink}`}>{item.title}</Link>)}
+            <div className={`${cBtn}`}>연습 페이지</div>
+            <button><Link to="/react-query">리액트 쿼리</Link></button>
+            <br />
+            <button><Link to="/rtk">리덕스 툴킷</Link></button>
         </div>
     )
 };
